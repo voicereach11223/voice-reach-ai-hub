@@ -1,88 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* VoiceReach Design System */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-
+    /* Core Brand Colors - HSL */
+    --electric-blue: 218 100% 50%;        /* #0056FF */
+    --royal-indigo: 234 65% 28%;          /* #1A1F71 */
+    --cyber-sky: 194 89% 64%;             /* #4FC3F7 */
+    --platinum: 210 17% 98%;              /* #F8F9FA */
+    --charcoal: 217 91% 10%;              /* #0F172A */
+    --graphite: 215 16% 37%;              /* #475569 */
+    
+    /* Semantic Tokens - Light Mode */
+    --background: 210 17% 98%;
+    --foreground: 217 91% 10%;
+    
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
+    --card-foreground: 217 91% 10%;
+    
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
-
-    --radius: 0.5rem;
-
+    --popover-foreground: 217 91% 10%;
+    
+    --primary: 218 100% 50%;              /* Electric Blue */
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 234 65% 28%;             /* Royal Indigo */
+    --secondary-foreground: 0 0% 100%;
+    
+    --accent: 194 89% 64%;                /* Cyber Sky */
+    --accent-foreground: 217 91% 10%;
+    
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 37%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 218 100% 50%;
+    
+    --radius: 16px;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(90deg, hsl(218 100% 50%) 0%, hsl(194 89% 64%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(218 100% 50%) 0%, hsl(194 89% 64%) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(210 17% 98%) 100%);
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 hsl(217 91% 10% / 0.05);
+    --shadow-md: 0 4px 6px -1px hsl(217 91% 10% / 0.1);
+    --shadow-lg: 0 10px 15px -3px hsl(217 91% 10% / 0.1);
+    --shadow-xl: 0 20px 25px -5px hsl(217 91% 10% / 0.1);
+    --shadow-glow: 0 0 40px hsl(218 100% 50% / 0.3);
+    
+    /* Transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
-
+  
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --background: 216 50% 6%;             /* Deep Space #0B0F1A */
+    --foreground: 0 0% 100%;
+    
+    --card: 215 25% 17%;                  /* Midnight Slate */
+    --card-foreground: 0 0% 100%;
+    
+    --popover: 215 25% 17%;
+    --popover-foreground: 0 0% 100%;
+    
+    --primary: 0 0% 100%;
+    --primary-foreground: 217 91% 10%;
+    
+    --secondary: 215 25% 17%;
+    --secondary-foreground: 0 0% 100%;
+    
+    --accent: 186 94% 53%;                /* Cyan Pulse */
+    --accent-foreground: 217 91% 10%;
+    
+    --muted: 215 25% 17%;
+    --muted-foreground: 211 25% 84%;
+    
+    --border: 215 25% 17%;
+    --input: 215 25% 17%;
+    --ring: 186 94% 53%;
+    
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -98,8 +114,98 @@ All colors MUST be HSL.
   * {
     @apply border-border;
   }
-
+  
   body {
     @apply bg-background text-foreground;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Space Grotesk', 'Inter', sans-serif;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+  
+  h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
+  h2 { font-size: clamp(2rem, 4vw, 3rem); }
+  h3 { font-size: clamp(1.5rem, 3vw, 2rem); }
+  
+  p {
+    font-weight: 400;
+  }
+}
+
+@layer components {
+  /* Hero Gradient Text */
+  .gradient-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* Glass Effect Cards */
+  .glass-card {
+    background: hsl(0 0% 100% / 0.8);
+    backdrop-filter: blur(12px);
+    border: 1px solid hsl(217 91% 10% / 0.1);
+  }
+  
+  /* Hover Lift Animation */
+  .hover-lift {
+    transition: var(--transition-smooth);
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+  }
+  
+  /* Gradient Button Base */
+  .btn-gradient {
+    background: var(--gradient-primary);
+    color: white;
+    font-weight: 600;
+    transition: var(--transition-smooth);
+  }
+  
+  .btn-gradient:hover {
+    box-shadow: var(--shadow-glow);
+    transform: translateY(-2px);
+  }
+  
+  /* Fade In Animation */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate-fadeInUp {
+    animation: fadeInUp 0.6s ease-out;
+  }
+  
+  /* Pulse Glow */
+  @keyframes pulseGlow {
+    0%, 100% {
+      box-shadow: 0 0 20px hsl(218 100% 50% / 0.3);
+    }
+    50% {
+      box-shadow: 0 0 40px hsl(218 100% 50% / 0.6);
+    }
+  }
+  
+  .animate-pulse-glow {
+    animation: pulseGlow 2s ease-in-out infinite;
   }
 }
