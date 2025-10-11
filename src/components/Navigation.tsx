@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
+import logo from "@/assets/voicereach-logo.png";
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -22,9 +23,9 @@ const Navigation = () => {
     >
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
-          {/* Logo placeholder - user will add their own */}
+          {/* Logo */}
           <div className="flex items-center space-x-2">
-            <div className="w-10 h-10 rounded-lg bg-gradient-primary"></div>
+            <img src={logo} alt="VoiceReach Logo" className="w-10 h-10" />
             <span className="font-heading font-bold text-xl">VoiceReach</span>
           </div>
 
