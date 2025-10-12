@@ -8,16 +8,16 @@
 
 @layer base {
   :root {
-    /* Core Brand Colors - HSL */
-    --electric-blue: 218 100% 50%;        /* #0056FF */
-    --royal-indigo: 234 65% 28%;          /* #1A1F71 */
-    --cyber-sky: 194 89% 64%;             /* #4FC3F7 */
-    --platinum: 210 17% 98%;              /* #F8F9FA */
+    /* Core Brand Colors - Pure Blue Palette HSL */
+    --primary-blue: 218 100% 50%;         /* #0056FF */
+    --light-blue: 218 100% 65%;           /* Lighter blue */
+    --dark-blue: 218 100% 35%;            /* Darker blue */
+    --ultra-light-blue: 218 60% 97%;      /* #F9FBFF */
     --charcoal: 217 91% 10%;              /* #0F172A */
-    --graphite: 215 16% 37%;              /* #475569 */
+    --graphite: 215 16% 47%;              /* Text gray */
     
     /* Semantic Tokens - Light Mode */
-    --background: 210 17% 98%;
+    --background: 0 0% 100%;              /* Pure white */
     --foreground: 217 91% 10%;
     
     --card: 0 0% 100%;
@@ -26,38 +26,38 @@
     --popover: 0 0% 100%;
     --popover-foreground: 217 91% 10%;
     
-    --primary: 218 100% 50%;              /* Electric Blue */
+    --primary: 218 100% 50%;              /* #0056FF */
     --primary-foreground: 0 0% 100%;
     
-    --secondary: 234 65% 28%;             /* Royal Indigo */
+    --secondary: 218 100% 35%;            /* Darker blue */
     --secondary-foreground: 0 0% 100%;
     
-    --accent: 194 89% 64%;                /* Cyber Sky */
-    --accent-foreground: 217 91% 10%;
+    --accent: 218 100% 65%;               /* Lighter blue */
+    --accent-foreground: 0 0% 100%;
     
-    --muted: 210 40% 96%;
-    --muted-foreground: 215 16% 37%;
+    --muted: 218 60% 97%;                 /* Ultra light blue */
+    --muted-foreground: 215 16% 47%;
     
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
     
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
+    --border: 218 30% 90%;
+    --input: 218 30% 90%;
     --ring: 218 100% 50%;
     
-    --radius: 16px;
+    --radius: 12px;
     
-    /* Gradients */
-    --gradient-primary: linear-gradient(90deg, hsl(218 100% 50%) 0%, hsl(194 89% 64%) 100%);
-    --gradient-hero: linear-gradient(135deg, hsl(218 100% 50%) 0%, hsl(194 89% 64%) 100%);
-    --gradient-subtle: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(210 17% 98%) 100%);
+    /* Pure Blue Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(218 100% 50%) 0%, hsl(218 100% 65%) 100%);
+    --gradient-hero: linear-gradient(135deg, hsl(218 100% 35%) 0%, hsl(218 100% 50%) 50%, hsl(218 100% 65%) 100%);
+    --gradient-subtle: linear-gradient(180deg, hsl(0 0% 100%) 0%, hsl(218 60% 97%) 100%);
     
-    /* Shadows */
+    /* Shadows with Blue Glow */
     --shadow-sm: 0 1px 2px 0 hsl(217 91% 10% / 0.05);
-    --shadow-md: 0 4px 6px -1px hsl(217 91% 10% / 0.1);
-    --shadow-lg: 0 10px 15px -3px hsl(217 91% 10% / 0.1);
-    --shadow-xl: 0 20px 25px -5px hsl(217 91% 10% / 0.1);
-    --shadow-glow: 0 0 40px hsl(218 100% 50% / 0.3);
+    --shadow-md: 0 4px 6px -1px hsl(217 91% 10% / 0.08);
+    --shadow-lg: 0 10px 20px -5px hsl(218 100% 50% / 0.15);
+    --shadow-xl: 0 20px 40px -10px hsl(218 100% 50% / 0.2);
+    --shadow-glow: 0 0 60px hsl(218 100% 50% / 0.4), 0 0 120px hsl(218 100% 50% / 0.2);
     
     /* Transitions */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
