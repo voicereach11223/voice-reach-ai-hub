@@ -35,7 +35,7 @@ function CanadianSolarIcon(props: SVGProps<SVGSVGElement>) {
 
 function SunPowerIcon(props: SVGProps<SVGSVGElement>) {
   return (
-    <img src={sunpowerLogo} alt="SunPower" className={props.className} />
+    <img src={sunpowerLogo} alt="SunPower" className={props.className} style={{ objectFit: 'contain', width: '100%', height: '100%' }} />
   );
 }
 
