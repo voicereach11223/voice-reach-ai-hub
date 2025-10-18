@@ -39,60 +39,52 @@ const WhyVoiceReach = () => {
             <span className="gradient-text">VoiceReach</span>
           </h2>
 
-          {/* Asymmetric Grid Layout */}
-          <div className="grid md:grid-cols-2 gap-6 mt-16 mb-12">
-            {/* Row 1 - Small text box + Large image placeholder */}
-            <div className="p-8 rounded-2xl bg-card border border-border">
-              <h3 className="font-heading font-bold text-xl mb-3">{benefits[0].title}</h3>
-              <p className="text-muted-foreground">{benefits[0].description}</p>
-            </div>
-            <div className="md:row-span-2 rounded-2xl bg-muted/30 border border-border flex items-center justify-center min-h-[300px]">
-              <div className="text-center text-muted-foreground/50">
-                <DollarSign className="w-16 h-16 mx-auto mb-2" />
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-16 mb-12">
+            {benefits.slice(0, 3).map((benefit, index) => (
+              <div
+                key={index}
+                className="p-8 rounded-2xl bg-card border border-border hover-lift"
+              >
+                <div className="w-14 h-14 rounded-xl bg-gradient-primary flex items-center justify-center mb-6">
+                  <benefit.icon className="w-7 h-7 text-white" />
+                </div>
+                <h3 className="font-heading font-bold text-xl mb-3">{benefit.title}</h3>
+                <p className="text-muted-foreground">{benefit.description}</p>
               </div>
-            </div>
+            ))}
+          </div>
 
-            {/* Row 2 - Large image placeholder + Text box */}
-            <div className="md:row-span-2 rounded-2xl bg-muted/30 border border-border flex items-center justify-center min-h-[300px]">
-              <div className="text-center text-muted-foreground/50">
-                <Zap className="w-16 h-16 mx-auto mb-2" />
+          <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto mb-12">
+            {benefits.slice(3).map((benefit, index) => (
+              <div
+                key={index}
+                className="p-8 rounded-2xl bg-card border border-border hover-lift"
+              >
+                <div className="w-14 h-14 rounded-xl bg-gradient-primary flex items-center justify-center mb-6">
+                  <benefit.icon className="w-7 h-7 text-white" />
+                </div>
+                <h3 className="font-heading font-bold text-xl mb-3">{benefit.title}</h3>
+                <p className="text-muted-foreground">{benefit.description}</p>
               </div>
-            </div>
-            <div className="p-8 rounded-2xl bg-card border border-border">
-              <h3 className="font-heading font-bold text-xl mb-3">{benefits[1].title}</h3>
-              <p className="text-muted-foreground">{benefits[1].description}</p>
-            </div>
+            ))}
+          </div>
 
-            {/* Row 3 - Small text box + Large image placeholder */}
-            <div className="p-8 rounded-2xl bg-card border border-border">
-              <h3 className="font-heading font-bold text-xl mb-3">{benefits[2].title}</h3>
-              <p className="text-muted-foreground">{benefits[2].description}</p>
-            </div>
-            <div className="md:row-span-2 rounded-2xl bg-muted/30 border border-border flex items-center justify-center min-h-[300px]">
-              <div className="text-center text-muted-foreground/50">
-                <TrendingUp className="w-16 h-16 mx-auto mb-2" />
+          {/* Animated chart placeholder */}
+          <div className="bg-card rounded-2xl p-8 md:p-12 border border-border text-center">
+            <h3 className="font-heading font-bold text-2xl mb-4">Before vs After Growth</h3>
+            <p className="text-muted-foreground mb-6">
+              See how VoiceReach transforms appointment volumes
+            </p>
+            <div className="h-48 flex items-end justify-center gap-8">
+              <div className="flex flex-col items-center">
+                <div className="w-24 bg-muted rounded-t-lg mb-2" style={{ height: "60px" }}></div>
+                <span className="text-sm font-medium">Before</span>
+                <span className="text-2xl font-bold text-muted-foreground">50</span>
               </div>
-            </div>
-
-            {/* Row 4 - Large image placeholder + Text box */}
-            <div className="md:row-span-2 rounded-2xl bg-muted/30 border border-border flex items-center justify-center min-h-[300px]">
-              <div className="text-center text-muted-foreground/50">
-                <Clock className="w-16 h-16 mx-auto mb-2" />
-              </div>
-            </div>
-            <div className="p-8 rounded-2xl bg-card border border-border">
-              <h3 className="font-heading font-bold text-xl mb-3">{benefits[3].title}</h3>
-              <p className="text-muted-foreground">{benefits[3].description}</p>
-            </div>
-
-            {/* Row 5 - Small text box + Large image placeholder */}
-            <div className="p-8 rounded-2xl bg-card border border-border">
-              <h3 className="font-heading font-bold text-xl mb-3">{benefits[4].title}</h3>
-              <p className="text-muted-foreground">{benefits[4].description}</p>
-            </div>
-            <div className="rounded-2xl bg-muted/30 border border-border flex items-center justify-center min-h-[200px]">
-              <div className="text-center text-muted-foreground/50">
-                <Brain className="w-16 h-16 mx-auto mb-2" />
+              <div className="flex flex-col items-center">
+                <div className="w-24 bg-gradient-primary rounded-t-lg mb-2" style={{ height: "180px" }}></div>
+                <span className="text-sm font-medium">After</span>
+                <span className="text-2xl font-bold gradient-text">200+</span>
               </div>
             </div>
           </div>
