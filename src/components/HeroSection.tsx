@@ -4,13 +4,13 @@ import heroDashboard from "@/assets/hero-dashboard.png";
 const HeroSection = () => {
   return (
     <section className="relative pt-24 pb-16 md:pt-32 md:pb-24 overflow-hidden">
-      {/* Version 1: Deep Electric Blue Gradient - Tech & Trust */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[hsl(220,70%,15%)] via-[hsl(220,60%,25%)] to-[hsl(220,50%,35%)] -z-10"></div>
+      {/* Version 3: Light Sky-Blue Gradient - Modern SaaS */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[hsl(200,100%,97%)] via-[hsl(210,100%,95%)] to-[hsl(220,80%,92%)] -z-10"></div>
       
-      {/* Electric blue glow orbs */}
-      <div className="absolute top-20 left-10 w-96 h-96 bg-[hsl(220,100%,50%)]/10 rounded-full blur-3xl -z-10"></div>
-      <div className="absolute bottom-20 right-10 w-96 h-96 bg-[hsl(200,100%,50%)]/8 rounded-full blur-3xl -z-10"></div>
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[hsl(210,100%,45%)]/5 rounded-full blur-3xl -z-10"></div>
+      {/* Soft sky-blue glow orbs */}
+      <div className="absolute top-20 left-10 w-[500px] h-[500px] bg-[hsl(200,100%,70%)]/15 rounded-full blur-3xl -z-10"></div>
+      <div className="absolute bottom-20 right-10 w-[500px] h-[500px] bg-[hsl(220,100%,75%)]/12 rounded-full blur-3xl -z-10"></div>
+      <div className="absolute top-1/3 right-1/3 w-[400px] h-[400px] bg-[hsl(210,100%,65%)]/8 rounded-full blur-3xl -z-10"></div>
       
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
