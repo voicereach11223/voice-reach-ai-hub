@@ -1,6 +1,57 @@
-import { Button } from "@/components/ui/button";
+import { useState } from "react";
+import { PopoverForm, PopoverFormButton, PopoverFormCutOutLeftIcon, PopoverFormCutOutRightIcon, PopoverFormSeparator, PopoverFormSuccess } from "@/components/ui/popover-form";
+import { useToast } from "@/hooks/use-toast";
+
+type FormState = "idle" | "loading" | "success";
 
 const FinalCTA = () => {
+  const [formState, setFormState] = useState<FormState>("idle");
+  const [open, setOpen] = useState(false);
+  const [fullName, setFullName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [email, setEmail] = useState("");
+  const { toast } = useToast();
+
+  async function submit() {
+    setFormState("loading");
+    
+    try {
+      const response = await fetch("https://hook.us2.make.com/z2a1w6c2xlu9q3dch3poesibaapjr8is", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          fullName,
+          phone,
+          email,
+          timestamp: new Date().toISOString(),
+        }),
+      });
+
+      if (response.ok) {
+        setFormState("success");
+        setTimeout(() => {
+          setOpen(false);
+          setFormState("idle");
+          setFullName("");
+          setPhone("");
+          setEmail("");
+        }, 3300);
+      } else {
+        throw new Error("Submission failed");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast({
+        title: "Error",
+        description: "Failed to submit the form. Please try again.",
+        variant: "destructive",
+      });
+      setFormState("idle");
+    }
+  }
+
   return (
     <section className="py-20 md:py-32 bg-gradient-subtle">
       <div className="container mx-auto px-4">
@@ -22,9 +73,93 @@ const FinalCTA = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
-            <Button variant="hero" size="lg">
-              Book Free Demo
-            </Button>
+            <PopoverForm
+              title="Book Free Demo"
+              open={open}
+              setOpen={setOpen}
+              width="380px"
+              height="420px"
+              showCloseButton={formState !== "success"}
+              showSuccess={formState === "success"}
+              openChild={
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    if (!fullName || !phone || !email) return;
+                    submit();
+                  }}
+                  className="space-y-4"
+                >
+                  <div className="px-4 pt-4">
+                    <label
+                      htmlFor="fullName"
+                      className="block text-sm font-medium text-muted-foreground mb-2"
+                    >
+                      Full Name
+                    </label>
+                    <input
+                      type="text"
+                      id="fullName"
+                      value={fullName}
+                      onChange={(e) => setFullName(e.target.value)}
+                      className="w-full px-3 py-2 border border-border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent bg-background text-foreground"
+                      required
+                    />
+                  </div>
+                  <div className="px-4">
+                    <label
+                      htmlFor="phone"
+                      className="block text-sm font-medium text-muted-foreground mb-2"
+                    >
+                      Phone Number
+                    </label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      className="w-full px-3 py-2 border border-border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent bg-background text-foreground"
+                      required
+                    />
+                  </div>
+                  <div className="px-4">
+                    <label
+                      htmlFor="email"
+                      className="block text-sm font-medium text-muted-foreground mb-2"
+                    >
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="w-full px-3 py-2 border border-border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-accent focus:border-accent bg-background text-foreground"
+                      required
+                    />
+                  </div>
+                  <div className="relative flex h-12 items-center px-[10px]">
+                    <PopoverFormSeparator />
+                    <div className="absolute left-0 top-0 -translate-x-[1.5px] -translate-y-1/2">
+                      <PopoverFormCutOutLeftIcon />
+                    </div>
+                    <div className="absolute right-0 top-0 translate-x-[1.5px] -translate-y-1/2 rotate-180">
+                      <PopoverFormCutOutRightIcon />
+                    </div>
+                    <PopoverFormButton
+                      loading={formState === "loading"}
+                      text="Submit"
+                    />
+                  </div>
+                </form>
+              }
+              successChild={
+                <PopoverFormSuccess
+                  title="Demo Booked Successfully!"
+                  description="Thank you! We'll contact you shortly to schedule your personalized demo."
+                />
+              }
+            />
           </div>
 
           <p className="text-sm text-muted-foreground">
