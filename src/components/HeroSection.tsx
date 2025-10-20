@@ -4,13 +4,18 @@ import heroDashboard from "@/assets/hero-dashboard.png";
 const HeroSection = () => {
   return (
     <section className="relative pt-24 pb-16 md:pt-32 md:pb-24 overflow-hidden">
-      {/* Version 3: Light Sky-Blue Gradient - Modern SaaS */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[hsl(200,100%,97%)] via-[hsl(210,100%,95%)] to-[hsl(220,80%,92%)] -z-10"></div>
+      {/* Premium Blue Gradient Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[hsl(210,100%,98%)] via-[hsl(215,100%,96%)] to-[hsl(220,90%,92%)] -z-10"></div>
       
-      {/* Soft sky-blue glow orbs */}
-      <div className="absolute top-20 left-10 w-[500px] h-[500px] bg-[hsl(200,100%,70%)]/15 rounded-full blur-3xl -z-10"></div>
-      <div className="absolute bottom-20 right-10 w-[500px] h-[500px] bg-[hsl(220,100%,75%)]/12 rounded-full blur-3xl -z-10"></div>
-      <div className="absolute top-1/3 right-1/3 w-[400px] h-[400px] bg-[hsl(210,100%,65%)]/8 rounded-full blur-3xl -z-10"></div>
+      {/* Top-left light source effect */}
+      <div className="absolute top-0 left-0 w-[800px] h-[800px] bg-gradient-radial from-[hsl(210,100%,95%)]/60 via-[hsl(215,100%,96%)]/30 to-transparent rounded-full blur-3xl -z-10"></div>
+      
+      {/* Deep blue bottom-right fade */}
+      <div className="absolute bottom-0 right-0 w-[900px] h-[900px] bg-gradient-to-tl from-[hsl(220,80%,88%)]/50 via-[hsl(215,85%,92%)]/30 to-transparent rounded-full blur-3xl -z-10"></div>
+      
+      {/* Subtle accent glow orbs for depth */}
+      <div className="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-[hsl(210,100%,90%)]/20 rounded-full blur-3xl -z-10"></div>
+      <div className="absolute bottom-1/3 left-1/4 w-[500px] h-[500px] bg-[hsl(215,95%,93%)]/15 rounded-full blur-3xl -z-10"></div>
       
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
