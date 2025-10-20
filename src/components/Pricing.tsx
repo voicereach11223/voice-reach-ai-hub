@@ -12,7 +12,7 @@ const Pricing = () => {
       period: "month",
       description: "Perfect for testing AI voice calling",
       features: [
-        "500 AI calls per month",
+        "1,200 included minutes, then $0.20/extra minute",
         "Basic appointment scheduling",
         "Email follow-ups",
         "Standard support",
@@ -28,7 +28,7 @@ const Pricing = () => {
       period: "month",
       description: "For growing solar companies",
       features: [
-        "2,000 AI calls per month",
+        "2,700 included minutes, then $0.16/extra minute",
         "Advanced appointment scheduling",
         "Multi-channel follow-ups",
         "Priority support",
