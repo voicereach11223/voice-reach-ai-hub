@@ -19,7 +19,7 @@ const CaseStudies = () => {
     {
       company: "GreenEnergy Pro",
       industry: "Commercial Solar",
-      icon: lightningIcon,
+      icon: brainIcon,
       metric: "+250% Appointments in 45 Days",
       savings: "$90K/year Saved",
       quote: "ROI-positive in just 30 days. The AI handles objections better than some of our reps.",
@@ -29,7 +29,7 @@ const CaseStudies = () => {
     {
       company: "Sunshine Solar",
       industry: "Solar Installation",
-      icon: brainIcon,
+      icon: lightningIcon,
       metric: "+400% Appointments in 90 Days",
       savings: "$180K/year Saved",
       quote: "Cut our calling costs by 80% while quadrupling our pipeline. Game-changing technology.",
@@ -63,7 +63,7 @@ const CaseStudies = () => {
                   <img 
                     src={study.icon} 
                     alt={`${study.company} icon`}
-                    className="w-16 h-16 object-contain transition-transform duration-300 group-hover:scale-110"
+                    className="w-20 h-20 object-contain transition-transform duration-300 group-hover:scale-110"
                   />
                 </div>
 
