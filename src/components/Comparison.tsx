@@ -4,33 +4,45 @@ import { Button } from "@/components/ui/button";
 const Comparison = () => {
   const comparisons = [
     {
-      category: "Cost per call",
-      ai: "$0.50 - $1.00",
-      human: "$5.00 - $15.00",
+      category: "Monthly Cost",
+      ai: "Starts from $247/month",
+      human: "$2,500 – $5,000/month (including salary & overhead)",
       aiWins: true,
     },
     {
       category: "Availability",
       ai: "24/7/365",
-      human: "8 hours/day",
+      human: "8 hours per day",
       aiWins: true,
     },
     {
       category: "Call volume",
-      ai: "Unlimited",
-      human: "50-80/day max",
+      ai: "Scales infinitely",
+      human: "50 – 80 calls/day max",
       aiWins: true,
     },
     {
-      category: "Consistency",
+      category: "Training time",
+      ai: "Zero – ready to call instantly",
+      human: "2 – 4 weeks average",
+      aiWins: true,
+    },
+    {
+      category: "Accuracy",
       ai: "100% script adherence",
-      human: "Varies by rep",
+      human: "Varies by rep performance",
       aiWins: true,
     },
     {
       category: "Follow-ups",
-      ai: "Instant, automated",
-      human: "Manual, delayed",
+      ai: "Instant & automated",
+      human: "Manual and delayed",
+      aiWins: true,
+    },
+    {
+      category: "Reporting & ROI",
+      ai: "Real-time analytics dashboard",
+      human: "Manual tracking",
       aiWins: true,
     },
   ];
@@ -41,11 +53,11 @@ const Comparison = () => {
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="font-heading font-bold mb-4">
-              AI vs Human Callers —{" "}
+              VoiceReach vs Human Callers —{" "}
               <span className="gradient-text">The Numbers Don't Lie</span>
             </h2>
             <p className="text-lg text-muted-foreground">
-              See why leading solar companies are making the switch
+              Here's why leading solar companies are switching to VoiceReach.
             </p>
           </div>
 
@@ -56,7 +68,7 @@ const Comparison = () => {
               <div className="font-heading font-semibold">Metric</div>
               <div className="font-heading font-semibold text-center">
                 <span className="inline-flex items-center justify-center px-4 py-2 rounded-lg bg-gradient-primary text-white text-sm">
-                  AI Agent
+                  VoiceReach
                 </span>
               </div>
               <div className="font-heading font-semibold text-center">Human Caller</div>
