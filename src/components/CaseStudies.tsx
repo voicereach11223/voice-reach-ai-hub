@@ -1,12 +1,15 @@
 import { Button } from "@/components/ui/button";
 import { TrendingUp, Clock, DollarSign } from "lucide-react";
+import sunIcon from "@/assets/sun-icon.png";
+import brainIcon from "@/assets/brain-icon.png";
+import lightningIcon from "@/assets/lightning-icon.png";
 
 const CaseStudies = () => {
   const caseStudies = [
     {
       company: "SolarMax",
       industry: "Residential Solar",
-      emoji: "🌞",
+      icon: sunIcon,
       metric: "+300% Appointments in 60 Days",
       savings: "$120K/year Saved",
       quote: "VoiceReach transformed our outreach. We went from 50 to 200+ qualified appointments per month.",
@@ -16,7 +19,7 @@ const CaseStudies = () => {
     {
       company: "GreenEnergy Pro",
       industry: "Commercial Solar",
-      emoji: "⚡",
+      icon: lightningIcon,
       metric: "+250% Appointments in 45 Days",
       savings: "$90K/year Saved",
       quote: "ROI-positive in just 30 days. The AI handles objections better than some of our reps.",
@@ -26,7 +29,7 @@ const CaseStudies = () => {
     {
       company: "Sunshine Solar",
       industry: "Solar Installation",
-      emoji: "☀",
+      icon: brainIcon,
       metric: "+400% Appointments in 90 Days",
       savings: "$180K/year Saved",
       quote: "Cut our calling costs by 80% while quadrupling our pipeline. Game-changing technology.",
@@ -56,7 +59,13 @@ const CaseStudies = () => {
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 {/* Icon at top */}
-                <div className="text-5xl mb-4 text-center">{study.emoji}</div>
+                <div className="mb-4 text-center flex justify-center">
+                  <img 
+                    src={study.icon} 
+                    alt={`${study.company} icon`}
+                    className="w-16 h-16 object-contain transition-transform duration-300 group-hover:scale-110"
+                  />
+                </div>
 
                 {/* Company name and category */}
                 <div className="text-center mb-6">
