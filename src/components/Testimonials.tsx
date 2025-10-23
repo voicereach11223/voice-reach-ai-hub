@@ -1,5 +1,12 @@
 import { motion } from "framer-motion";
 import { TestimonialsColumn } from "@/components/ui/testimonials-columns";
+import jenniferMartinez from "@/assets/testimonials/jennifer-martinez.jpeg";
+import robertChang from "@/assets/testimonials/robert-chang.jpeg";
+import amandaFoster from "@/assets/testimonials/amanda-foster.jpeg";
+import liamTorres from "@/assets/testimonials/liam-torres.jpeg";
+import sophiaPatel from "@/assets/testimonials/sophia-patel.jpeg";
+import ethanBrooks from "@/assets/testimonials/ethan-brooks.png";
+import oliviaChen from "@/assets/testimonials/olivia-chen.jpg";
 
 const Testimonials = () => {
   const testimonials = [
@@ -8,42 +15,49 @@ const Testimonials = () => {
       name: "Jennifer Martinez",
       role: "Sales Director",
       company: "SunPower Solutions",
+      image: jenniferMartinez,
     },
     {
       text: "I was skeptical about AI calling, but VoiceReach proved me wrong. It handles objections better than most of my team, works 24/7, and never takes a sick day. Game changer.",
       name: "Robert Chang",
       role: "CEO",
       company: "Solar Dynamics",
+      image: robertChang,
     },
     {
       text: "The ROI is insane. We cut our calling costs by 75% and increased our pipeline by 300%. Plus, our sales team can now focus on closing instead of cold calling.",
       name: "Amanda Foster",
       role: "VP of Operations",
       company: "Bright Future Energy",
+      image: amandaFoster,
     },
     {
       text: "VoiceReach gave us instant scalability. From 50 to 500 calls a day in just one week — with zero hiring. That's the future of outbound.",
       name: "Liam Torres",
       role: "Operations Lead",
       company: "EcoVolt Solar",
+      image: liamTorres,
     },
     {
       text: "Our clients constantly mention how professional our AI callers sound. The consistency and tone are unmatched — it feels human, but smarter.",
       name: "Sophia Patel",
       role: "Marketing Manager",
       company: "SolarOne",
+      image: sophiaPatel,
     },
     {
       text: "I didn't expect results this fast. Within 10 days, we booked 40% more appointments while cutting our call budget in half.",
       name: "Ethan Brooks",
       role: "Founder",
       company: "BrightSky Renewables",
+      image: ethanBrooks,
     },
     {
       text: "VoiceReach is like having a full-time SDR team that never sleeps. It's efficient, scalable, and genuinely impressive tech.",
       name: "Olivia Chen",
       role: "Head of Growth",
       company: "HelioWave Energy",
+      image: oliviaChen,
     },
   ];
 
