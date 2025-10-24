@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Link } from "react-router-dom";
 import heroDashboard from "@/assets/hero-dashboard.png";
 
 const HeroSection = () => {
@@ -41,20 +42,24 @@ const HeroSection = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 animate-fade-in-up" style={{ animationDelay: "0.3s" }}>
-            <Button 
-              variant="hero" 
-              size="lg"
-              className="min-w-[200px] shadow-lg hover:shadow-glow"
-            >
-              Book Free Demo
-            </Button>
-            <Button 
-              variant="outline" 
-              size="lg"
-              className="min-w-[200px] border-2 border-primary/30 hover:border-primary hover:bg-primary/5"
-            >
-              See Pricing
-            </Button>
+            <Link to="/book-demo">
+              <Button 
+                variant="hero" 
+                size="lg"
+                className="min-w-[200px] shadow-lg hover:shadow-glow"
+              >
+                Book Free Demo
+              </Button>
+            </Link>
+            <a href="#pricing">
+              <Button 
+                variant="outline" 
+                size="lg"
+                className="min-w-[200px] border-2 border-primary/30 hover:border-primary hover:bg-primary/5"
+              >
+                See Pricing
+              </Button>
+            </a>
           </div>
 
           {/* Hero Visual - Dashboard with glow effect */}
