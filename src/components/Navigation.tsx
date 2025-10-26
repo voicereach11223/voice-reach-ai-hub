@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import logo from "@/assets/voicereach-logo.png";
 
 const Navigation = () => {
@@ -60,11 +59,9 @@ const Navigation = () => {
             <Button variant="outline" size="sm" className="hidden md:inline-flex">
               See Dashboard
             </Button>
-            <Link to="/book-demo">
-              <Button variant="hero" size="sm">
-                Book Free Demo
-              </Button>
-            </Link>
+            <Button variant="hero" size="sm">
+              Get Started
+            </Button>
           </div>
         </div>
       </div>

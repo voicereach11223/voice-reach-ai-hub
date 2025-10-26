@@ -1,6 +1,5 @@
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
 import { useState } from "react";
 
 const Pricing = () => {
@@ -140,25 +139,13 @@ const Pricing = () => {
                     )}
                   </div>
 
-                  {plan.cta === "Book Free Demo" ? (
-                    <Link to="/book-demo" className="w-full">
-                      <Button
-                        variant={plan.popular ? "hero" : "outline"}
-                        className="w-full"
-                        size="lg"
-                      >
-                        {plan.cta}
-                      </Button>
-                    </Link>
-                  ) : (
-                    <Button
-                      variant={plan.popular ? "hero" : "outline"}
-                      className="w-full"
-                      size="lg"
-                    >
-                      {plan.cta}
-                    </Button>
-                  )}
+                  <Button
+                    variant={plan.popular ? "hero" : "outline"}
+                    className="w-full"
+                    size="lg"
+                  >
+                    {plan.cta}
+                  </Button>
                 </div>
 
                 <div className="space-y-3">
@@ -177,11 +164,9 @@ const Pricing = () => {
             <p className="text-lg font-semibold mb-4">
               Ready to scale your appointments?
             </p>
-            <Link to="/book-demo">
-              <Button variant="gradient" size="lg">
-                Book Free Demo → Start Scaling Today
-              </Button>
-            </Link>
+            <Button variant="gradient" size="lg">
+              Book Free Demo → Start Scaling Today
+            </Button>
             <p className="text-sm text-muted-foreground mt-4">
               ⚡ Limited demo slots available this week. Risk-free. No credit card required.
             </p>

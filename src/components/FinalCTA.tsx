@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
 
 const FinalCTA = () => {
   return (
@@ -23,11 +22,9 @@ const FinalCTA = () => {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
-            <Link to="/book-demo">
-              <Button variant="hero" size="lg">
-                Book Free Demo
-              </Button>
-            </Link>
+            <Button variant="hero" size="lg">
+              Book Free Demo
+            </Button>
           </div>
 
           <p className="text-sm text-muted-foreground">
