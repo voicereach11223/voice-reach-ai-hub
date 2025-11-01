@@ -1,15 +1,19 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { useForm } from "react-hook-form";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useState } from "react";
 import { toast } from "sonner";
+import { countries } from "@/lib/countries";
+import { CheckCircle2 } from "lucide-react";
 
 const formSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
   email: z.string().email("Please enter a valid email address"),
+  country: z.string().min(1, "Please select a country"),
   phone: z.string().min(10, "Please enter a valid phone number"),
 });
 
@@ -17,9 +21,11 @@ type FormData = z.infer<typeof formSchema>;
 
 const FinalCTA = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
     reset,
   } = useForm<FormData>({
@@ -31,7 +37,7 @@ const FinalCTA = () => {
     try {
       // Simulate form submission
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      toast.success("Thank you! We'll contact you within 24 hours.");
+      setIsSuccess(true);
       reset();
     } catch (error) {
       toast.error("Something went wrong. Please try again.");
@@ -63,8 +69,10 @@ const FinalCTA = () => {
           {/* Book Demo Form */}
           <div className="max-w-md mx-auto mb-10">
             <div className="glass-card p-8 rounded-2xl border border-border shadow-lg">
-              <h3 className="font-heading font-bold text-xl mb-6">Book Your Free Demo</h3>
-              <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+              {!isSuccess ? (
+                <>
+                  <h3 className="font-heading font-bold text-xl mb-6">Book Your Free Demo</h3>
+                  <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 <div className="text-left">
                   <Label htmlFor="name">Name</Label>
                   <Input
@@ -89,6 +97,35 @@ const FinalCTA = () => {
                   />
                   {errors.email && (
                     <p className="text-sm text-destructive mt-1">{errors.email.message}</p>
+                  )}
+                </div>
+
+                <div className="text-left">
+                  <Label htmlFor="country">Country</Label>
+                  <Controller
+                    name="country"
+                    control={control}
+                    render={({ field }) => (
+                      <Select onValueChange={field.onChange} value={field.value}>
+                        <SelectTrigger className="mt-1">
+                          <SelectValue placeholder="Select your country" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {countries.map((country) => (
+                            <SelectItem key={country.code} value={country.code}>
+                              <span className="flex items-center gap-2">
+                                <span>{country.flag}</span>
+                                <span>{country.name}</span>
+                                <span className="text-muted-foreground">{country.dialCode}</span>
+                              </span>
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                    )}
+                  />
+                  {errors.country && (
+                    <p className="text-sm text-destructive mt-1">{errors.country.message}</p>
                   )}
                 </div>
 
@@ -119,6 +156,24 @@ const FinalCTA = () => {
               <p className="text-xs text-muted-foreground mt-4">
                 Your data is secure. No spam. No hassle.
               </p>
+                </>
+              ) : (
+                <div className="text-center py-8">
+                  <CheckCircle2 className="w-16 h-16 text-green-500 mx-auto mb-4" />
+                  <h3 className="font-heading font-bold text-2xl mb-2 text-green-500">
+                    ✅ Demo booked successfully!
+                  </h3>
+                  <p className="text-muted-foreground mb-6">
+                    Thank you! We'll contact you within 24 hours to schedule your demo.
+                  </p>
+                  <Button 
+                    variant="outline" 
+                    onClick={() => setIsSuccess(false)}
+                  >
+                    Book Another Demo
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
 
