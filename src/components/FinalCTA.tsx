@@ -22,12 +22,14 @@ type FormData = z.infer<typeof formSchema>;
 const FinalCTA = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [selectedCountryCode, setSelectedCountryCode] = useState("");
   const {
     register,
     handleSubmit,
     control,
     formState: { errors },
     reset,
+    setValue,
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
   });
@@ -106,7 +108,17 @@ const FinalCTA = () => {
                     name="country"
                     control={control}
                     render={({ field }) => (
-                      <Select onValueChange={field.onChange} value={field.value}>
+                      <Select 
+                        onValueChange={(value) => {
+                          field.onChange(value);
+                          const country = countries.find(c => c.code === value);
+                          if (country) {
+                            setSelectedCountryCode(country.dialCode);
+                            setValue("phone", country.dialCode + " ");
+                          }
+                        }} 
+                        value={field.value}
+                      >
                         <SelectTrigger className="mt-1">
                           <SelectValue placeholder="Select your country" />
                         </SelectTrigger>
@@ -135,7 +147,7 @@ const FinalCTA = () => {
                     id="phone"
                     type="tel"
                     {...register("phone")}
-                    placeholder="Your phone number"
+                    placeholder={selectedCountryCode ? `${selectedCountryCode} Your phone number` : "Select country first"}
                     className="mt-1"
                   />
                   {errors.phone && (
@@ -158,17 +170,24 @@ const FinalCTA = () => {
               </p>
                 </>
               ) : (
-                <div className="text-center py-8">
-                  <CheckCircle2 className="w-16 h-16 text-green-500 mx-auto mb-4" />
-                  <h3 className="font-heading font-bold text-2xl mb-2 text-green-500">
-                    ✅ Demo booked successfully!
+                <div className="text-center py-8 animate-fade-in">
+                  <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-accent/10 mb-6">
+                    <CheckCircle2 className="w-12 h-12 text-accent animate-scale-in" />
+                  </div>
+                  <h3 className="font-heading font-bold text-2xl mb-3 gradient-text">
+                    Success! Your demo has been booked
                   </h3>
-                  <p className="text-muted-foreground mb-6">
-                    Thank you! We'll contact you within 24 hours to schedule your demo.
+                  <p className="text-muted-foreground mb-6 text-lg">
+                    We'll be in touch shortly.
                   </p>
                   <Button 
                     variant="outline" 
-                    onClick={() => setIsSuccess(false)}
+                    onClick={() => {
+                      setIsSuccess(false);
+                      reset();
+                      setSelectedCountryCode("");
+                    }}
+                    className="hover-scale"
                   >
                     Book Another Demo
                   </Button>
