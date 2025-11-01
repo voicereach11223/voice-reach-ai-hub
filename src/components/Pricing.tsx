@@ -143,6 +143,11 @@ const Pricing = () => {
                     variant={plan.popular ? "hero" : "outline"}
                     className="w-full"
                     size="lg"
+                    onClick={() => {
+                      if (plan.cta === "Book Free Demo" || plan.cta === "Start Free Trial") {
+                        document.getElementById('book-demo')?.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }}
                   >
                     {plan.cta}
                   </Button>
@@ -164,7 +169,13 @@ const Pricing = () => {
             <p className="text-lg font-semibold mb-4">
               Ready to scale your appointments?
             </p>
-            <Button variant="gradient" size="lg">
+            <Button 
+              variant="gradient" 
+              size="lg"
+              onClick={() => {
+                document.getElementById('book-demo')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
               Book Free Demo → Start Scaling Today
             </Button>
             <p className="text-sm text-muted-foreground mt-4">

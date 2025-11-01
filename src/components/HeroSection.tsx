@@ -45,6 +45,9 @@ const HeroSection = () => {
               variant="hero" 
               size="lg"
               className="min-w-[200px] shadow-lg hover:shadow-glow"
+              onClick={() => {
+                document.getElementById('book-demo')?.scrollIntoView({ behavior: 'smooth' });
+              }}
             >
               Book Free Demo
             </Button>
@@ -52,6 +55,9 @@ const HeroSection = () => {
               variant="outline" 
               size="lg"
               className="min-w-[200px] border-2 border-primary/30 hover:border-primary hover:bg-primary/5"
+              onClick={() => {
+                document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
+              }}
             >
               See Pricing
             </Button>
