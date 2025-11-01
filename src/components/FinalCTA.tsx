@@ -49,8 +49,8 @@ const FinalCTA = () => {
   };
 
   return (
-    <section id="book-demo" className="py-20 md:py-32 bg-gradient-subtle scroll-mt-20">
-      <div className="container mx-auto px-4">
+    <section id="book-demo" className="py-12 sm:py-16 md:py-20 lg:py-32 bg-gradient-subtle scroll-mt-20">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 mb-6">
             <span className="relative flex h-3 w-3">
@@ -60,50 +60,50 @@ const FinalCTA = () => {
             <span className="text-sm font-medium">Limited Demo Slots Available</span>
           </div>
 
-          <h2 className="font-heading font-bold mb-6">
+          <h2 className="font-heading font-bold mb-4 sm:mb-6 text-2xl sm:text-3xl md:text-4xl lg:text-5xl">
             Ready to <span className="gradient-text">3X Your Appointments?</span>
           </h2>
 
-          <p className="text-lg md:text-xl text-muted-foreground mb-10 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg md:text-xl text-muted-foreground mb-8 sm:mb-10 max-w-2xl mx-auto px-4">
             Join 500+ solar leaders scaling with VoiceReach. Get your AI fully set up within 24 hours.
           </p>
 
           {/* Book Demo Form */}
-          <div className="max-w-md mx-auto mb-10">
-            <div className="glass-card p-8 rounded-2xl border border-border shadow-lg">
+          <div className="max-w-md mx-auto mb-8 sm:mb-10 px-4 sm:px-0">
+            <div className="glass-card p-6 sm:p-8 rounded-2xl border border-border shadow-lg">
               {!isSuccess ? (
                 <>
-                  <h3 className="font-heading font-bold text-xl mb-6">Book Your Free Demo</h3>
-                  <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+                  <h3 className="font-heading font-bold text-lg sm:text-xl mb-4 sm:mb-6">Book Your Free Demo</h3>
+                  <form onSubmit={handleSubmit(onSubmit)} className="space-y-3 sm:space-y-4">
                 <div className="text-left">
-                  <Label htmlFor="name">Name</Label>
+                  <Label htmlFor="name" className="text-sm sm:text-base">Name</Label>
                   <Input
                     id="name"
                     {...register("name")}
                     placeholder="Your name"
-                    className="mt-1"
+                    className="mt-1 text-sm sm:text-base h-10 sm:h-11"
                   />
                   {errors.name && (
-                    <p className="text-sm text-destructive mt-1">{errors.name.message}</p>
+                    <p className="text-xs sm:text-sm text-destructive mt-1">{errors.name.message}</p>
                   )}
                 </div>
 
                 <div className="text-left">
-                  <Label htmlFor="email">Email</Label>
+                  <Label htmlFor="email" className="text-sm sm:text-base">Email</Label>
                   <Input
                     id="email"
                     type="email"
                     {...register("email")}
                     placeholder="your@email.com"
-                    className="mt-1"
+                    className="mt-1 text-sm sm:text-base h-10 sm:h-11"
                   />
                   {errors.email && (
-                    <p className="text-sm text-destructive mt-1">{errors.email.message}</p>
+                    <p className="text-xs sm:text-sm text-destructive mt-1">{errors.email.message}</p>
                   )}
                 </div>
 
                 <div className="text-left">
-                  <Label htmlFor="country">Country</Label>
+                  <Label htmlFor="country" className="text-sm sm:text-base">Country</Label>
                   <Controller
                     name="country"
                     control={control}
@@ -119,16 +119,16 @@ const FinalCTA = () => {
                         }} 
                         value={field.value}
                       >
-                        <SelectTrigger className="mt-1">
+                        <SelectTrigger className="mt-1 text-sm sm:text-base h-10 sm:h-11">
                           <SelectValue placeholder="Select your country" />
                         </SelectTrigger>
-                        <SelectContent>
+                        <SelectContent className="max-h-[50vh]">
                           {countries.map((country) => (
-                            <SelectItem key={country.code} value={country.code}>
+                            <SelectItem key={country.code} value={country.code} className="text-sm sm:text-base">
                               <span className="flex items-center gap-2">
-                                <span>{country.flag}</span>
-                                <span>{country.name}</span>
-                                <span className="text-muted-foreground">{country.dialCode}</span>
+                                <span className="text-base sm:text-lg">{country.flag}</span>
+                                <span className="truncate max-w-[120px] sm:max-w-[200px]">{country.name}</span>
+                                <span className="text-muted-foreground text-xs sm:text-sm">{country.dialCode}</span>
                               </span>
                             </SelectItem>
                           ))}
@@ -137,21 +137,21 @@ const FinalCTA = () => {
                     )}
                   />
                   {errors.country && (
-                    <p className="text-sm text-destructive mt-1">{errors.country.message}</p>
+                    <p className="text-xs sm:text-sm text-destructive mt-1">{errors.country.message}</p>
                   )}
                 </div>
 
                 <div className="text-left">
-                  <Label htmlFor="phone">Phone Number</Label>
+                  <Label htmlFor="phone" className="text-sm sm:text-base">Phone Number</Label>
                   <Input
                     id="phone"
                     type="tel"
                     {...register("phone")}
                     placeholder={selectedCountryCode ? `${selectedCountryCode} Your phone number` : "Select country first"}
-                    className="mt-1"
+                    className="mt-1 text-sm sm:text-base h-10 sm:h-11"
                   />
                   {errors.phone && (
-                    <p className="text-sm text-destructive mt-1">{errors.phone.message}</p>
+                    <p className="text-xs sm:text-sm text-destructive mt-1">{errors.phone.message}</p>
                   )}
                 </div>
 
@@ -159,25 +159,25 @@ const FinalCTA = () => {
                   type="submit"
                   variant="hero"
                   size="lg"
-                  className="w-full"
+                  className="w-full text-sm sm:text-base h-11 sm:h-12"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? "Booking..." : "Book My Demo"}
                 </Button>
               </form>
-              <p className="text-xs text-muted-foreground mt-4">
+              <p className="text-xs sm:text-sm text-muted-foreground mt-3 sm:mt-4">
                 Your data is secure. No spam. No hassle.
               </p>
                 </>
               ) : (
-                <div className="text-center py-8 animate-fade-in">
-                  <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-accent/10 mb-6">
-                    <CheckCircle2 className="w-12 h-12 text-accent animate-scale-in" />
+                <div className="text-center py-6 sm:py-8 animate-fade-in">
+                  <div className="inline-flex items-center justify-center w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-accent/10 mb-4 sm:mb-6">
+                    <CheckCircle2 className="w-10 h-10 sm:w-12 sm:h-12 text-accent animate-scale-in" />
                   </div>
-                  <h3 className="font-heading font-bold text-2xl mb-3 gradient-text">
+                  <h3 className="font-heading font-bold text-xl sm:text-2xl mb-2 sm:mb-3 gradient-text px-4">
                     Success! Your demo has been booked
                   </h3>
-                  <p className="text-muted-foreground mb-6 text-lg">
+                  <p className="text-muted-foreground mb-4 sm:mb-6 text-base sm:text-lg px-4">
                     We'll be in touch shortly.
                   </p>
                   <Button 
@@ -187,7 +187,7 @@ const FinalCTA = () => {
                       reset();
                       setSelectedCountryCode("");
                     }}
-                    className="hover-scale"
+                    className="hover-scale text-sm sm:text-base h-10 sm:h-11"
                   >
                     Book Another Demo
                   </Button>
@@ -196,27 +196,27 @@ const FinalCTA = () => {
             </div>
           </div>
 
-          <p className="text-sm text-muted-foreground mb-6">
+          <p className="text-xs sm:text-sm text-muted-foreground mb-4 sm:mb-6 px-4">
             ⚡ Limited demo slots available this week. Risk-free. No credit card required.
           </p>
 
           {/* Trust indicators */}
-          <div className="flex flex-wrap items-center justify-center gap-8 mt-12 pt-12 border-t border-border">
-            <div className="text-center">
-              <div className="font-heading font-bold text-3xl gradient-text mb-1">500+</div>
-              <div className="text-sm text-muted-foreground">Active Companies</div>
+          <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-8 mt-8 sm:mt-12 pt-8 sm:pt-12 border-t border-border px-4">
+            <div className="text-center min-w-[80px] sm:min-w-[100px]">
+              <div className="font-heading font-bold text-2xl sm:text-3xl gradient-text mb-1">500+</div>
+              <div className="text-xs sm:text-sm text-muted-foreground">Active Companies</div>
             </div>
-            <div className="text-center">
-              <div className="font-heading font-bold text-3xl gradient-text mb-1">2M+</div>
-              <div className="text-sm text-muted-foreground">Calls Made</div>
+            <div className="text-center min-w-[80px] sm:min-w-[100px]">
+              <div className="font-heading font-bold text-2xl sm:text-3xl gradient-text mb-1">2M+</div>
+              <div className="text-xs sm:text-sm text-muted-foreground">Calls Made</div>
             </div>
-            <div className="text-center">
-              <div className="font-heading font-bold text-3xl gradient-text mb-1">99.9%</div>
-              <div className="text-sm text-muted-foreground">Uptime</div>
+            <div className="text-center min-w-[80px] sm:min-w-[100px]">
+              <div className="font-heading font-bold text-2xl sm:text-3xl gradient-text mb-1">99.9%</div>
+              <div className="text-xs sm:text-sm text-muted-foreground">Uptime</div>
             </div>
-            <div className="text-center">
-              <div className="font-heading font-bold text-3xl gradient-text mb-1">24hr</div>
-              <div className="text-sm text-muted-foreground">Setup Time</div>
+            <div className="text-center min-w-[80px] sm:min-w-[100px]">
+              <div className="font-heading font-bold text-2xl sm:text-3xl gradient-text mb-1">24hr</div>
+              <div className="text-xs sm:text-sm text-muted-foreground">Setup Time</div>
             </div>
           </div>
         </div>
