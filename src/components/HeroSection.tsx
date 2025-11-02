@@ -44,7 +44,7 @@ const HeroSection = () => {
             <Button 
               variant="hero" 
               size="lg"
-              className="min-w-[200px] shadow-lg hover:shadow-glow"
+              className="w-full sm:w-auto min-w-[200px] shadow-lg hover:shadow-glow"
               onClick={() => {
                 document.getElementById('book-demo')?.scrollIntoView({ behavior: 'smooth' });
               }}
@@ -54,7 +54,7 @@ const HeroSection = () => {
             <Button 
               variant="outline" 
               size="lg"
-              className="min-w-[200px] border-2 border-primary/30 hover:border-primary hover:bg-primary/5"
+              className="w-full sm:w-auto min-w-[200px] border-2 border-primary/30 hover:border-primary hover:bg-primary/5"
               onClick={() => {
                 document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' });
               }}

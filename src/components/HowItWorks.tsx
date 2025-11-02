@@ -34,7 +34,7 @@ const HowItWorks = () => {
   ];
 
   return (
-    <section className="py-20 md:py-32 bg-gradient-subtle">
+    <section className="py-20 md:py-32 bg-gradient-subtle overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
@@ -75,7 +75,7 @@ const HowItWorks = () => {
           </div>
 
           {/* Video CTA */}
-          <div className="bg-card rounded-2xl p-8 border border-border text-center">
+          <div className="bg-card rounded-2xl p-6 sm:p-8 border border-border text-center">
             <h3 className="font-heading font-bold text-2xl mb-4">
               See the entire process in action
             </h3>
