@@ -176,7 +176,8 @@ const Pricing = () => {
                 document.getElementById('book-demo')?.scrollIntoView({ behavior: 'smooth' });
               }}
             >
-              Book Free Demo → Start Scaling Today
+              <span className="whitespace-nowrap">Book Free Demo</span>
+              <span className="hidden sm:inline ml-1">→ Start Scaling Today</span>
             </Button>
             <p className="text-sm text-muted-foreground mt-4">
               ⚡ Limited demo slots available this week. Risk-free. No credit card required.

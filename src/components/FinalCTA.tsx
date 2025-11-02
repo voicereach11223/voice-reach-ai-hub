@@ -49,7 +49,7 @@ const FinalCTA = () => {
   };
 
   return (
-    <section id="book-demo" className="py-12 sm:py-16 md:py-20 lg:py-32 bg-gradient-subtle scroll-mt-20">
+    <section id="book-demo" className="py-12 sm:py-16 md:py-20 lg:py-32 bg-gradient-subtle scroll-mt-20 overflow-x-hidden">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 mb-6">
@@ -119,7 +119,7 @@ const FinalCTA = () => {
                         }} 
                         value={field.value}
                       >
-                        <SelectTrigger className="mt-1 text-sm sm:text-base h-10 sm:h-11">
+                        <SelectTrigger id="country" className="mt-1 text-sm sm:text-base h-10 sm:h-11">
                           <SelectValue placeholder="Select your country" />
                         </SelectTrigger>
                         <SelectContent>
