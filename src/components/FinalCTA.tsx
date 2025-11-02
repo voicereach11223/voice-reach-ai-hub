@@ -122,7 +122,7 @@ const FinalCTA = () => {
                         <SelectTrigger className="mt-1 text-sm sm:text-base h-10 sm:h-11">
                           <SelectValue placeholder="Select your country" />
                         </SelectTrigger>
-                        <SelectContent className="max-h-[50vh]">
+                        <SelectContent>
                           {countries.map((country) => (
                             <SelectItem key={country.code} value={country.code} className="text-sm sm:text-base">
                               <span className="flex items-center gap-2">
