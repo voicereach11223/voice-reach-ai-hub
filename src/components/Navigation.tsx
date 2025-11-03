@@ -1,9 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
 import logo from "@/assets/voicereach-logo.png";
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,34 +27,42 @@ const Navigation = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
+          <Link to="/" className="flex items-center space-x-2">
             <img src={logo} alt="VoiceReach Logo" className="w-10 h-10" />
             <span className="font-heading font-bold text-xl">VoiceReach</span>
-          </div>
+          </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-8">
-            <a href="#features" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-              Features
-            </a>
-            <a href="#results" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-              Results
-            </a>
-            <a href="#pricing" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-              Pricing
-            </a>
-            <a href="#case-studies" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-              Case Studies
-            </a>
-            <a href="#resources" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-              Resources
-            </a>
-            <a href="#faq" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-              FAQ
-            </a>
-            <a href="#about" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+            {isHomePage ? (
+              <>
+                <a href="#features" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+                  Features
+                </a>
+                <a href="#results" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+                  Results
+                </a>
+                <a href="#pricing" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+                  Pricing
+                </a>
+                <a href="#case-studies" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+                  Case Studies
+                </a>
+                <a href="#resources" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+                  Resources
+                </a>
+                <a href="#faq" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+                  FAQ
+                </a>
+              </>
+            ) : (
+              <Link to="/" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+                Home
+              </Link>
+            )}
+            <Link to="/about" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
               About
-            </a>
+            </Link>
           </div>
 
           {/* CTA Buttons */}
