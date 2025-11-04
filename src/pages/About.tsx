@@ -2,12 +2,28 @@ import { Button } from "@/components/ui/button";
 import { GradientHeading } from "@/components/ui/gradient-heading";
 import { Card } from "@/components/ui/card";
 import { Sparkles, Target, Eye, Lightbulb, Zap, Users, TrendingUp, Award, Calendar, Rocket } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 
 const About = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    // Redirect to homepage if accessed directly without navigation state
+    if (!location.state?.fromNavigation) {
+      navigate('/', { replace: true });
+    }
+  }, [location, navigate]);
+
+  const handleScrollToStory = () => {
+    const storySection = document.getElementById('our-story');
+    if (storySection) {
+      storySection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
   const technologies = [
     {
@@ -57,23 +73,8 @@ const About = () => {
 
   const team = [
     {
-      name: "Sarah Johnson",
+      name: "Ethan Blake",
       role: "CEO & Founder",
-      image: "/placeholder.svg"
-    },
-    {
-      name: "Michael Chen",
-      role: "CTO",
-      image: "/placeholder.svg"
-    },
-    {
-      name: "Emily Rodriguez",
-      role: "Head of AI",
-      image: "/placeholder.svg"
-    },
-    {
-      name: "David Kim",
-      role: "VP of Sales",
       image: "/placeholder.svg"
     }
   ];
@@ -85,24 +86,24 @@ const About = () => {
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 bg-gradient-subtle">
         <div className="container mx-auto max-w-4xl text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 mb-6 animate-fade-in">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 mb-6 animate-fade-in shadow-sm">
             <Sparkles className="w-4 h-4 text-accent" />
             <span className="text-sm font-medium text-accent">About VoiceReach</span>
           </div>
           
-          <GradientHeading size="xl" className="mb-6 animate-fade-in">
+          <GradientHeading size="xl" className="mb-6 animate-fade-in leading-tight">
             Giving voice to the future of sales
           </GradientHeading>
           
-          <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto animate-fade-in">
+          <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto animate-fade-in leading-relaxed">
             We're on a mission to transform how businesses connect with their customers through intelligent AI voice technology
           </p>
           
           <Button 
             variant="gradient" 
             size="lg"
-            onClick={() => navigate('/#book-demo')}
-            className="animate-fade-in"
+            onClick={handleScrollToStory}
+            className="animate-fade-in shadow-lg hover:shadow-xl transition-shadow"
           >
             Explore Our Story
           </Button>
@@ -110,26 +111,26 @@ const About = () => {
       </section>
 
       {/* Our Mission */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
+      <section className="py-24 px-4 sm:px-6 lg:px-8">
         <div className="container mx-auto max-w-6xl">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
+          <div className="grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <div className="space-y-6">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-2 shadow-sm">
                 <Target className="w-4 h-4 text-primary" />
                 <span className="text-sm font-medium text-primary">Our Mission</span>
               </div>
-              <GradientHeading size="lg" className="mb-6">
+              <GradientHeading size="lg" className="leading-tight">
                 Scale your outreach without losing the human touch
               </GradientHeading>
-              <p className="text-muted-foreground leading-relaxed mb-4">
+              <p className="text-muted-foreground leading-relaxed text-base">
                 VoiceReach empowers businesses to scale their voice outreach through cutting-edge AI automation. We eliminate the bottleneck of manual calling while maintaining natural, meaningful conversations.
               </p>
-              <p className="text-muted-foreground leading-relaxed">
+              <p className="text-muted-foreground leading-relaxed text-base">
                 Our platform handles thousands of calls simultaneously, allowing your team to focus on high-value interactions while AI manages the rest.
               </p>
             </div>
-            <Card className="p-8 bg-gradient-to-br from-primary/5 to-accent/5 border-primary/10 hover-lift">
-              <div className="space-y-6">
+            <Card className="p-8 sm:p-10 bg-gradient-to-br from-primary/5 to-accent/5 border-primary/10 hover-lift shadow-lg">
+              <div className="space-y-8">
                 <div className="flex items-start gap-4">
                   <div className="p-3 rounded-lg bg-primary/10">
                     <Zap className="w-6 h-6 text-primary" />
@@ -150,7 +151,7 @@ const About = () => {
                 </div>
                 <div className="flex items-start gap-4">
                   <div className="p-3 rounded-lg bg-secondary/10">
-                    <TrendingUp className="w-6 h-6 text-secondary-foreground" />
+                    <Target className="w-6 h-6 text-secondary-foreground" />
                   </div>
                   <div>
                     <h4 className="font-semibold mb-2">Better Results</h4>
@@ -183,7 +184,7 @@ const About = () => {
       </section>
 
       {/* Our Story */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
+      <section id="our-story" className="py-20 px-4 sm:px-6 lg:px-8 scroll-mt-20">
         <div className="container mx-auto max-w-4xl">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
             <Lightbulb className="w-4 h-4 text-primary" />
@@ -207,17 +208,17 @@ const About = () => {
       </section>
 
       {/* Our Technology */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-subtle">
+      <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gradient-subtle">
         <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 mb-6">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 border border-accent/20 mb-6 shadow-sm">
               <Rocket className="w-4 h-4 text-accent" />
               <span className="text-sm font-medium text-accent">Our Technology</span>
             </div>
-            <GradientHeading size="lg" className="mb-4">
+            <GradientHeading size="lg" className="mb-6 leading-tight">
               Powered by cutting-edge AI
             </GradientHeading>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               Advanced technology that makes every conversation feel natural and effective
             </p>
           </div>
@@ -226,13 +227,13 @@ const About = () => {
             {technologies.map((tech, index) => (
               <Card 
                 key={index} 
-                className="p-6 text-center hover-lift bg-background/50 backdrop-blur-sm"
+                className="p-8 text-center hover-lift bg-background/50 backdrop-blur-sm shadow-md hover:shadow-lg transition-shadow"
               >
-                <div className="w-12 h-12 rounded-lg bg-gradient-primary flex items-center justify-center mx-auto mb-4">
-                  <tech.icon className="w-6 h-6 text-white" />
+                <div className="w-14 h-14 rounded-lg bg-gradient-primary flex items-center justify-center mx-auto mb-6 shadow-md">
+                  <tech.icon className="w-7 h-7 text-white" />
                 </div>
-                <h3 className="font-semibold mb-2">{tech.title}</h3>
-                <p className="text-sm text-muted-foreground">{tech.description}</p>
+                <h3 className="font-semibold mb-3 text-base">{tech.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{tech.description}</p>
               </Card>
             ))}
           </div>
@@ -240,38 +241,33 @@ const About = () => {
       </section>
 
       {/* Our Team */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
+      <section className="py-24 px-4 sm:px-6 lg:px-8">
         <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6">
+          <div className="text-center mb-16">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6 shadow-sm">
               <Users className="w-4 h-4 text-primary" />
               <span className="text-sm font-medium text-primary">Our Team</span>
             </div>
-            <GradientHeading size="lg" className="mb-4">
-              Meet the minds behind VoiceReach
+            <GradientHeading size="lg" className="mb-6 leading-tight">
+              Meet the mind behind VoiceReach
             </GradientHeading>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              A passionate team dedicated to revolutionizing voice communication
+            <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+              Passionate about revolutionizing voice communication through AI innovation
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {team.map((member, index) => (
-              <Card 
-                key={index} 
-                className="p-6 text-center hover-lift"
-              >
-                <div className="w-24 h-24 rounded-full bg-gradient-primary mx-auto mb-4 overflow-hidden">
-                  <img 
-                    src={member.image} 
-                    alt={member.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <h3 className="font-semibold mb-1">{member.name}</h3>
-                <p className="text-sm text-muted-foreground">{member.role}</p>
-              </Card>
-            ))}
+          <div className="flex justify-center">
+            <Card className="p-10 sm:p-12 text-center hover-lift max-w-sm shadow-lg hover:shadow-xl transition-shadow">
+              <div className="w-40 h-40 rounded-full bg-gradient-primary mx-auto mb-8 overflow-hidden shadow-lg ring-4 ring-primary/10">
+                <img 
+                  src={team[0].image} 
+                  alt={team[0].name}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <h3 className="font-semibold text-2xl mb-2">{team[0].name}</h3>
+              <p className="text-muted-foreground text-base">{team[0].role}</p>
+            </Card>
           </div>
         </div>
       </section>
@@ -312,28 +308,43 @@ const About = () => {
       </section>
 
       {/* Join the Journey */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8">
+      <section className="py-24 px-4 sm:px-6 lg:px-8">
         <div className="container mx-auto max-w-4xl text-center">
-          <div className="p-12 rounded-2xl bg-gradient-to-br from-primary/10 via-accent/5 to-primary/5 border border-primary/10">
-            <Sparkles className="w-12 h-12 text-primary mx-auto mb-6" />
-            <GradientHeading size="lg" className="mb-6">
+          <div className="p-12 sm:p-16 rounded-2xl bg-gradient-to-br from-primary/10 via-accent/5 to-primary/5 border border-primary/10 shadow-xl">
+            <Sparkles className="w-14 h-14 text-primary mx-auto mb-8" />
+            <GradientHeading size="lg" className="mb-6 leading-tight">
               Join us in shaping the future
             </GradientHeading>
-            <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+            <p className="text-lg text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed">
               Be part of the AI voice revolution. Let's transform how your business connects with customers.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button 
                 variant="gradient" 
                 size="lg"
-                onClick={() => navigate('/#book-demo')}
+                onClick={() => {
+                  navigate('/');
+                  setTimeout(() => {
+                    const demoSection = document.getElementById('book-demo');
+                    if (demoSection) {
+                      demoSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                  }, 100);
+                }}
+                className="shadow-lg hover:shadow-xl transition-shadow w-full sm:w-auto"
               >
                 Book a Demo
               </Button>
               <Button 
                 variant="outline" 
                 size="lg"
-                onClick={() => navigate('/')}
+                onClick={() => {
+                  navigate('/');
+                  setTimeout(() => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }, 100);
+                }}
+                className="shadow-sm hover:shadow-md transition-shadow w-full sm:w-auto"
               >
                 Explore Platform
               </Button>

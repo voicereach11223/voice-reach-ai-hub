@@ -1,4 +1,5 @@
 import { Check } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const links = {
@@ -41,12 +42,22 @@ const Footer = () => {
                 <ul className="space-y-2">
                   {items.map((item) => (
                     <li key={item}>
-                      <a
-                        href="#"
-                        className="text-secondary-foreground/80 hover:text-secondary-foreground transition-colors text-sm"
-                      >
-                        {item}
-                      </a>
+                      {item === "About" ? (
+                        <Link
+                          to="/about"
+                          state={{ fromNavigation: true }}
+                          className="text-secondary-foreground/80 hover:text-secondary-foreground transition-colors text-sm"
+                        >
+                          {item}
+                        </Link>
+                      ) : (
+                        <a
+                          href="#"
+                          className="text-secondary-foreground/80 hover:text-secondary-foreground transition-colors text-sm"
+                        >
+                          {item}
+                        </a>
+                      )}
                     </li>
                   ))}
                 </ul>

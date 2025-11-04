@@ -60,7 +60,7 @@ const Navigation = () => {
                 Home
               </Link>
             )}
-            <Link to="/about" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+            <Link to="/about" state={{ fromNavigation: true }} className="text-sm font-medium text-foreground hover:text-primary transition-colors">
               About
             </Link>
           </div>
