@@ -12,11 +12,9 @@ const About = () => {
   const location = useLocation();
 
   useEffect(() => {
-    // Redirect to homepage if accessed directly without navigation state
-    if (!location.state?.fromNavigation) {
-      navigate('/', { replace: true });
-    }
-  }, [location, navigate]);
+    // Scroll to top when page loads
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
 
   const handleScrollToStory = () => {
     const storySection = document.getElementById('our-story');
@@ -150,8 +148,8 @@ const About = () => {
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
-                  <div className="p-3 rounded-lg bg-secondary/10">
-                    <Target className="w-6 h-6 text-secondary-foreground" />
+                  <div className="p-3 rounded-lg bg-primary/10">
+                    <Target className="w-6 h-6 text-primary" />
                   </div>
                   <div>
                     <h4 className="font-semibold mb-2">Better Results</h4>
