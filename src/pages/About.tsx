@@ -6,6 +6,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import ethanPhoto from "@/assets/Ethan_Blake.png";
 
 const About = () => {
   const navigate = useNavigate();
@@ -73,7 +74,7 @@ const About = () => {
     {
       name: "Ethan Blake",
       role: "CEO & Founder",
-      image: "/placeholder.svg"
+      image: ethanPhoto
     }
   ];
 
@@ -246,17 +247,17 @@ const About = () => {
               <Users className="w-4 h-4 text-primary" />
               <span className="text-sm font-medium text-primary">Our Team</span>
             </div>
-            <GradientHeading size="lg" className="mb-6 leading-tight">
-              Meet the mind behind VoiceReach
+            <GradientHeading size="lg" className="mb-6 leading-tight text-primary">
+              Meet Our Founder
             </GradientHeading>
             <p className="text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Passionate about revolutionizing voice communication through AI innovation
+              The mind behind VoiceReach — turning vision into intelligent innovation.
             </p>
           </div>
 
           <div className="flex justify-center">
             <Card className="p-10 sm:p-12 text-center hover-lift max-w-sm shadow-lg hover:shadow-xl transition-shadow">
-              <div className="w-40 h-40 rounded-full bg-gradient-primary mx-auto mb-8 overflow-hidden shadow-lg ring-4 ring-primary/10">
+              <div className="w-40 h-40 rounded-full bg-gradient-primary mx-auto mb-8 overflow-hidden shadow-lg ring-4 ring-primary/20">
                 <img 
                   src={team[0].image} 
                   alt={team[0].name}
@@ -265,6 +266,9 @@ const About = () => {
               </div>
               <h3 className="font-semibold text-2xl mb-2">{team[0].name}</h3>
               <p className="text-muted-foreground text-base">{team[0].role}</p>
+              <p className="text-muted-foreground/90 italic mt-4 leading-relaxed">
+                Leading the vision behind VoiceReach — shaping the future of AI voice outreach.
+              </p>
             </Card>
           </div>
         </div>
