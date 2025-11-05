@@ -4,10 +4,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -51,6 +53,20 @@ const Login = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                 />
+              </div>
+
+              <div className="flex items-center space-x-2">
+                <Checkbox 
+                  id="remember" 
+                  checked={rememberMe}
+                  onCheckedChange={(checked) => setRememberMe(checked as boolean)}
+                />
+                <label
+                  htmlFor="remember"
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                  Remember Me
+                </label>
               </div>
 
               <div className="flex justify-end">
@@ -109,6 +125,13 @@ const Login = () => {
           <p className="text-lg text-white/90">
             Access your AI calling dashboard and manage campaigns easily.
           </p>
+          
+          {/* Dashboard Preview Placeholder */}
+          <div className="mt-8 bg-white/10 backdrop-blur-sm rounded-xl p-6 shadow-2xl border border-white/20">
+            <div className="aspect-video bg-white/5 rounded-lg flex items-center justify-center">
+              <p className="text-white/60 text-sm">Dashboard Preview</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>

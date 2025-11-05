@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Info } from "lucide-react";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +14,7 @@ const Signup = () => {
     password: "",
     confirmPassword: "",
   });
+  const [agreedToTerms, setAgreedToTerms] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -88,6 +91,29 @@ const Signup = () => {
                 />
               </div>
 
+              <div className="flex items-center space-x-2">
+                <Checkbox 
+                  id="terms" 
+                  checked={agreedToTerms}
+                  onCheckedChange={(checked) => setAgreedToTerms(checked as boolean)}
+                />
+                <label
+                  htmlFor="terms"
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 flex items-center gap-1"
+                >
+                  I agree to the Terms and Conditions
+                  <a 
+                    href="#" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center"
+                    onClick={(e) => e.preventDefault()}
+                  >
+                    <Info className="h-3.5 w-3.5 text-muted-foreground hover:text-primary transition-colors" />
+                  </a>
+                </label>
+              </div>
+
               <Button type="submit" className="w-full" size="lg">
                 Sign Up
               </Button>
@@ -135,6 +161,13 @@ const Signup = () => {
           <p className="text-lg text-white/90">
             Automate calls, qualify leads, and grow smarter.
           </p>
+          
+          {/* Dashboard Preview Placeholder */}
+          <div className="mt-8 bg-white/10 backdrop-blur-sm rounded-xl p-6 shadow-2xl border border-white/20">
+            <div className="aspect-video bg-white/5 rounded-lg flex items-center justify-center">
+              <p className="text-white/60 text-sm">Dashboard Preview</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
