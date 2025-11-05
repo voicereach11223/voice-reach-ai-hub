@@ -67,18 +67,16 @@ const Navigation = () => {
 
           {/* CTA Buttons */}
           <div className="flex items-center gap-3">
-            <Button variant="outline" size="sm" className="hidden md:inline-flex">
-              See Dashboard
-            </Button>
-            <Button 
-              variant="hero" 
-              size="sm"
-              onClick={() => {
-                document.getElementById('book-demo')?.scrollIntoView({ behavior: 'smooth' });
-              }}
-            >
-              Get Started
-            </Button>
+            <Link to="/login">
+              <Button variant="outline" size="sm" className="hidden md:inline-flex">
+                See Dashboard
+              </Button>
+            </Link>
+            <Link to="/signup">
+              <Button variant="hero" size="sm">
+                Get Started
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
