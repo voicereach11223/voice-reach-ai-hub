@@ -5,16 +5,40 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
 import { CheckCircle } from "lucide-react";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("");
   const [showSuccess, setShowSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const { toast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Backend integration placeholder
-    console.log("Password reset requested for:", email);
-    setShowSuccess(true);
+    setLoading(true);
+
+    try {
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/`,
+      });
+
+      if (error) throw error;
+
+      setShowSuccess(true);
+      toast({
+        title: "Email Sent",
+        description: "Password reset email sent! Please check your inbox.",
+      });
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: error.message,
+        variant: "destructive",
+      });
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -52,8 +76,8 @@ const ForgotPassword = () => {
                 />
               </div>
 
-              <Button type="submit" className="w-full" size="lg">
-                Send Reset Link
+              <Button type="submit" className="w-full" size="lg" disabled={loading}>
+                {loading ? "Sending..." : "Send Reset Link"}
               </Button>
             </form>
           </Card>
