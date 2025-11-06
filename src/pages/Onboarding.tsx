@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -10,6 +13,37 @@ import { useToast } from "@/hooks/use-toast";
 import { CheckCircle } from "lucide-react";
 import { countries } from "@/lib/countries";
 
+const onboardingSchema = z.object({
+  fullName: z.string()
+    .trim()
+    .min(1, "Full name is required")
+    .max(100, "Full name must be less than 100 characters")
+    .regex(/^[a-zA-Z\s'-]+$/, "Full name can only contain letters, spaces, hyphens, and apostrophes"),
+  email: z.string().email(),
+  companyName: z.string()
+    .trim()
+    .min(1, "Company name is required")
+    .max(200, "Company name must be less than 200 characters"),
+  roleTitle: z.string()
+    .trim()
+    .min(1, "Role title is required")
+    .max(100, "Role title must be less than 100 characters"),
+  companySize: z.string().min(1, "Company size is required"),
+  location: z.string().min(1, "Location is required"),
+  useCase: z.string().min(1, "Use case is required"),
+  useCaseOther: z.string().max(500, "Use case description must be less than 500 characters").optional(),
+}).refine((data) => {
+  if (data.useCase === "Other") {
+    return data.useCaseOther && data.useCaseOther.trim().length > 0;
+  }
+  return true;
+}, {
+  message: "Please specify your use case",
+  path: ["useCaseOther"],
+});
+
+type OnboardingFormData = z.infer<typeof onboardingSchema>;
+
 const Onboarding = () => {
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
@@ -17,16 +51,21 @@ const Onboarding = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    companyName: "",
-    roleTitle: "",
-    companySize: "",
-    location: "",
-    useCase: "",
-    useCaseOther: "",
+  const { register, handleSubmit, formState: { errors }, setValue, watch, trigger } = useForm<OnboardingFormData>({
+    resolver: zodResolver(onboardingSchema),
+    defaultValues: {
+      fullName: "",
+      email: "",
+      companyName: "",
+      roleTitle: "",
+      companySize: "",
+      location: "",
+      useCase: "",
+      useCaseOther: "",
+    },
   });
+
+  const watchedFields = watch();
 
   useEffect(() => {
     checkAuthAndProfile();
@@ -53,62 +92,28 @@ const Onboarding = () => {
     }
 
     // Pre-fill email and name
-    setFormData(prev => ({
-      ...prev,
-      email: profile?.email || session.user.email || "",
-      fullName: profile?.full_name || "",
-    }));
+    setValue("email", profile?.email || session.user.email || "");
+    setValue("fullName", profile?.full_name || "");
   };
 
-  const handleChange = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
-  };
-
-  const handleNext = () => {
-    // Validation for each step
-    if (step === 1) {
-      if (!formData.fullName.trim()) {
-        toast({
-          title: "Required Field",
-          description: "Please enter your full name",
-          variant: "destructive",
-        });
-        return;
-      }
-    } else if (step === 2) {
-      if (!formData.companyName.trim() || !formData.roleTitle.trim() || !formData.companySize || !formData.location) {
-        toast({
-          title: "Required Fields",
-          description: "Please fill in all company information",
-          variant: "destructive",
-        });
-        return;
-      }
-    }
-    setStep(step + 1);
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleNext = async () => {
+    // Validate current step fields
+    let fieldsToValidate: (keyof OnboardingFormData)[] = [];
     
-    if (!formData.useCase) {
-      toast({
-        title: "Required Field",
-        description: "Please select a use case",
-        variant: "destructive",
-      });
-      return;
+    if (step === 1) {
+      fieldsToValidate = ["fullName"];
+    } else if (step === 2) {
+      fieldsToValidate = ["companyName", "roleTitle", "companySize", "location"];
     }
 
-    if (formData.useCase === "Other" && !formData.useCaseOther.trim()) {
-      toast({
-        title: "Required Field",
-        description: "Please specify your use case",
-        variant: "destructive",
-      });
-      return;
+    const isValid = await trigger(fieldsToValidate);
+    
+    if (isValid) {
+      setStep(step + 1);
     }
+  };
 
+  const onSubmit = async (data: OnboardingFormData) => {
     setLoading(true);
 
     try {
@@ -123,14 +128,14 @@ const Onboarding = () => {
         .from("onboarding_data")
         .insert({
           user_id: session.user.id,
-          full_name: formData.fullName,
-          email: formData.email,
-          company_name: formData.companyName,
-          role_title: formData.roleTitle,
-          company_size: formData.companySize,
-          location: formData.location,
-          use_case: formData.useCase,
-          use_case_other: formData.useCase === "Other" ? formData.useCaseOther : null,
+          full_name: data.fullName,
+          email: data.email,
+          company_name: data.companyName,
+          role_title: data.roleTitle,
+          company_size: data.companySize,
+          location: data.location,
+          use_case: data.useCase,
+          use_case_other: data.useCase === "Other" ? data.useCaseOther : null,
         });
 
       if (onboardingError) throw onboardingError;
@@ -214,7 +219,7 @@ const Onboarding = () => {
         </div>
 
         <Card className="p-8 shadow-xl">
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             {/* Step 1: Personal Info */}
             {step === 1 && (
               <div className="space-y-6 animate-fade-in">
@@ -231,10 +236,11 @@ const Onboarding = () => {
                     id="fullName"
                     type="text"
                     placeholder="John Doe"
-                    value={formData.fullName}
-                    onChange={(e) => handleChange("fullName", e.target.value)}
-                    required
+                    {...register("fullName")}
                   />
+                  {errors.fullName && (
+                    <p className="text-sm text-destructive">{errors.fullName.message}</p>
+                  )}
                 </div>
 
                 <div className="space-y-2">
@@ -242,7 +248,7 @@ const Onboarding = () => {
                   <Input
                     id="email"
                     type="email"
-                    value={formData.email}
+                    {...register("email")}
                     disabled
                     className="bg-muted"
                   />
@@ -270,10 +276,11 @@ const Onboarding = () => {
                     id="companyName"
                     type="text"
                     placeholder="Acme Inc."
-                    value={formData.companyName}
-                    onChange={(e) => handleChange("companyName", e.target.value)}
-                    required
+                    {...register("companyName")}
                   />
+                  {errors.companyName && (
+                    <p className="text-sm text-destructive">{errors.companyName.message}</p>
+                  )}
                 </div>
 
                 <div className="space-y-2">
@@ -282,17 +289,18 @@ const Onboarding = () => {
                     id="roleTitle"
                     type="text"
                     placeholder="Sales Manager"
-                    value={formData.roleTitle}
-                    onChange={(e) => handleChange("roleTitle", e.target.value)}
-                    required
+                    {...register("roleTitle")}
                   />
+                  {errors.roleTitle && (
+                    <p className="text-sm text-destructive">{errors.roleTitle.message}</p>
+                  )}
                 </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="companySize">Company Size</Label>
                   <Select
-                    value={formData.companySize}
-                    onValueChange={(value) => handleChange("companySize", value)}
+                    value={watchedFields.companySize}
+                    onValueChange={(value) => setValue("companySize", value)}
                   >
                     <SelectTrigger>
                       <SelectValue placeholder="Select company size" />
@@ -304,13 +312,16 @@ const Onboarding = () => {
                       <SelectItem value="200+">200+ employees</SelectItem>
                     </SelectContent>
                   </Select>
+                  {errors.companySize && (
+                    <p className="text-sm text-destructive">{errors.companySize.message}</p>
+                  )}
                 </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="location">Location (Country)</Label>
                   <Select
-                    value={formData.location}
-                    onValueChange={(value) => handleChange("location", value)}
+                    value={watchedFields.location}
+                    onValueChange={(value) => setValue("location", value)}
                   >
                     <SelectTrigger>
                       <SelectValue placeholder="Select country" />
@@ -323,6 +334,9 @@ const Onboarding = () => {
                       ))}
                     </SelectContent>
                   </Select>
+                  {errors.location && (
+                    <p className="text-sm text-destructive">{errors.location.message}</p>
+                  )}
                 </div>
 
                 <div className="flex gap-4">
@@ -355,8 +369,8 @@ const Onboarding = () => {
                 <div className="space-y-2">
                   <Label>Use Case</Label>
                   <Select
-                    value={formData.useCase}
-                    onValueChange={(value) => handleChange("useCase", value)}
+                    value={watchedFields.useCase}
+                    onValueChange={(value) => setValue("useCase", value)}
                   >
                     <SelectTrigger>
                       <SelectValue placeholder="Select your primary use case" />
@@ -377,19 +391,23 @@ const Onboarding = () => {
                       <SelectItem value="Other">Other</SelectItem>
                     </SelectContent>
                   </Select>
+                  {errors.useCase && (
+                    <p className="text-sm text-destructive">{errors.useCase.message}</p>
+                  )}
                 </div>
 
-                {formData.useCase === "Other" && (
+                {watchedFields.useCase === "Other" && (
                   <div className="space-y-2 animate-fade-in">
                     <Label htmlFor="useCaseOther">Please specify</Label>
                     <Input
                       id="useCaseOther"
                       type="text"
                       placeholder="Describe your use case"
-                      value={formData.useCaseOther}
-                      onChange={(e) => handleChange("useCaseOther", e.target.value)}
-                      required
+                      {...register("useCaseOther")}
                     />
+                    {errors.useCaseOther && (
+                      <p className="text-sm text-destructive">{errors.useCaseOther.message}</p>
+                    )}
                   </div>
                 )}
 
