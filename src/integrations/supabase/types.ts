@@ -14,7 +14,83 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      onboarding_data: {
+        Row: {
+          company_name: string
+          company_size: string
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          location: string
+          role_title: string
+          use_case: string
+          use_case_other: string | null
+          user_id: string
+        }
+        Insert: {
+          company_name: string
+          company_size: string
+          created_at?: string
+          email: string
+          full_name: string
+          id?: string
+          location: string
+          role_title: string
+          use_case: string
+          use_case_other?: string | null
+          user_id: string
+        }
+        Update: {
+          company_name?: string
+          company_size?: string
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          location?: string
+          role_title?: string
+          use_case?: string
+          use_case_other?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "onboarding_data_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string
+          email: string
+          full_name: string | null
+          id: string
+          is_onboarded: boolean
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          full_name?: string | null
+          id: string
+          is_onboarded?: boolean
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          full_name?: string | null
+          id?: string
+          is_onboarded?: boolean
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

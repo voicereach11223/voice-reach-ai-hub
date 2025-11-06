@@ -28,13 +28,24 @@ const Login = () => {
 
       if (error) throw error;
 
+      // Check if user is onboarded
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("is_onboarded")
+        .eq("id", data.user.id)
+        .single();
+
       toast({
         title: "Welcome back!",
         description: "Successfully logged in",
       });
 
-      // Redirect to dashboard (or home for now)
-      navigate("/");
+      // Redirect based on onboarding status
+      if (profile?.is_onboarded) {
+        navigate("/dashboard");
+      } else {
+        navigate("/onboarding");
+      }
     } catch (error: any) {
       toast({
         title: "Login Failed",

@@ -62,8 +62,13 @@ const Signup = () => {
       setShowSuccess(true);
       toast({
         title: "Success!",
-        description: "Verification email sent! Please check your inbox.",
+        description: "Account created! Redirecting to onboarding...",
       });
+
+      // Redirect to onboarding after 1.5 seconds
+      setTimeout(() => {
+        navigate("/onboarding");
+      }, 1500);
     } catch (error: any) {
       toast({
         title: "Signup Failed",
