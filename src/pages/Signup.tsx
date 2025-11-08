@@ -73,12 +73,8 @@ const Signup = () => {
       setShowSuccess(true);
       toast({
         title: "Success!",
-        description: "Account created! Redirecting to onboarding...",
+        description: "Please check your email to confirm your account.",
       });
-
-      setTimeout(() => {
-        navigate("/onboarding");
-      }, 1500);
     } catch (error: any) {
       toast({
         title: "Signup Failed",
@@ -104,11 +100,26 @@ const Signup = () => {
 
           <Card className="p-8 shadow-xl">
             {showSuccess && (
-              <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg animate-fade-in flex items-center gap-3">
-                <CheckCircle className="h-5 w-5 text-green-600" />
-                <p className="text-sm text-green-800">
-                  ✅ Verification email sent! Please check your inbox.
-                </p>
+              <div className="mb-6 p-6 bg-gradient-to-br from-primary/5 via-accent/5 to-primary/10 border-2 border-primary/20 rounded-xl animate-fade-in shadow-lg">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center shadow-glow">
+                    <CheckCircle className="h-6 w-6 text-white" />
+                  </div>
+                  <div className="flex-1 space-y-2">
+                    <h3 className="text-lg font-bold text-foreground">
+                      Account Created Successfully! 🎉
+                    </h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      We've sent a confirmation email to your inbox. Please click the verification link to activate your account and get started with VoiceReach.
+                    </p>
+                    <div className="mt-3 pt-3 border-t border-primary/10">
+                      <p className="text-xs text-muted-foreground flex items-center gap-2">
+                        <Info className="h-4 w-4 text-primary" />
+                        <span>After confirming your email, log in to complete your onboarding and access the dashboard.</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
             )}
             
